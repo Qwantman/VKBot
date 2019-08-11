@@ -1,5 +1,6 @@
 from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
+import random
 from datetime import datetime
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c" 
 vk_session = vk_api.VkApi(token = token)
@@ -10,5 +11,7 @@ while True:
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
       print('Текст сообщения: '+ str(event.text))
-    if(event.t):
-      vk.session.method('messages.send')
+      response = event.text.lower()
+      if(event.from_user and not event.from_me):
+        if(response == 'Тест'):
+          vk.session.method('messages.send', {"user_id": event.user_id, "message": "CHECK!", "random_id": random.randint(-2147483648,+2147483648)})
