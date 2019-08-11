@@ -26,7 +26,7 @@ while True:
         else:
           message = input('Введите сообщение в ответ: ')
           send_message(message)
-      elif(event.from_chat and not event.from_me):
+      elif(event.from_chat):
         if(response != ' '):
           if(response != ' '):
             break
