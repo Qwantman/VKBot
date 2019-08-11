@@ -27,9 +27,5 @@ while True:
           message = input('Введите сообщение в ответ: ')
           send_message(message)
       elif(event.from_chat):
-        if(response != ' '):
-          if(response != ' '):
-            break
-        else:
-          message = input('Введите сообщение в ответ: ')
-          send_message(message)
+        message = input('Введите сообщение в ответ: ')
+        send_message(message)
