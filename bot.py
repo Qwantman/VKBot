@@ -14,6 +14,7 @@ def send_message(message=None, attachment=None):
 def send_chat(message=None, attachment=None):
   vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для беседок
+kolvo = 0
 adminlist=['201464141', '525009136']
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
 vk_session = vk_api.VkApi(token = token)
