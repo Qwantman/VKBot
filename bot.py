@@ -2,8 +2,6 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 import random
 import time
-event=' '
-event.text=' '
 def send_message(message=None, attachment=None):
   vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для ЛС
@@ -17,7 +15,7 @@ longpoll = VkLongPoll(vk_session)
 start_time = time.monotonic()
 print('Бот запущен!')
 #если не выдало ошибок, тогда ща пойдут логи если кто-то напишет
-while(event.text.lower() != 'выкл' or 'off'):
+while True:
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
       print('Текст сообщения: '+ str(event.text))
