@@ -91,10 +91,6 @@ while(1 == 1):
           text = 'Человек с id: ' +str(id) +' добавлен в список модеров человеком с id: ' +str(event.user_id)
           print(text)
           send_message(message = text, attachment = 'photo-184588235_457239050')
-        else:
-          text = 'Команда введена не верно'
-          print(text)
-          send_message(message=text)
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
