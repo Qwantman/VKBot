@@ -98,7 +98,7 @@ while(1 == 1):
         elif(response == 'addmoder'):
           if(str(event.user_id) in adminlist or moderlist):
             send_message(message='Введите id человека в консоле')
-           id = input('Введите id человека: ') 
+            id = input('Введите id человека: ') 
            if(id == 'отмена'):
               text = 'Админ отменил добавление'
               print(text)
