@@ -42,7 +42,7 @@ while(1 == 1):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
         elif(response == 'аптайм'):
           send_message(message='С момента запуска прошло: ' +str(int(time.monotonic() - start_time)) +' секунд', attachment='photo-184588235_457239049')
-          send_message(message='С момента первого запуска прошло: ' +str(int(time.monotonic() - start_time+full_time)) +' секунд', attachment='photo-184588235_457239049'))
+          send_message(message='С момента первого запуска прошло: ' +str(int(time.monotonic() - (start_time+full_time))) +' секунд', attachment='photo-184588235_457239049'))
         elif(response == 'помощь'):
           send_message(message='''
           Бот - проверка роботоспособности.
