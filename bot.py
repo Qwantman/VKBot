@@ -41,7 +41,7 @@ while True:
           ''')
         elif(response == 'статус'):
           dir=os.getcwd()
-          stat = chech_status()
+          stat = check_status()
           if(stat == 1):
             stat = 'OK'
           else:
