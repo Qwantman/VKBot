@@ -78,7 +78,7 @@ while(1 == 1):
         elif(response == 'тест'):
           send_message(message = 'Тест пройден')
         elif(response == 'addadmin'):
-          id = input('Введите id человекав консоле')
+          send_message(message='Введите id человека в консоле')
           adminlist.append(id)
           text = 'Человек с id: ' +id +' добавлен в список админов человеком с id: ' +str(event.user_id)
           print(text)
