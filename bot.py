@@ -19,9 +19,9 @@ while True:
       print('Текст сообщения: '+ str(event.text))
       response = event.text.lower()
       if(event.from_user and not event.from_me):
+        print('Пользователь с id:' +str(event.user_id) +"запросил команду " +str(response))
         if(response == 'бот' or 'bot'):
-          print('Пользователь с id:' +str(event.user_id) +"запросил команду bot")
-          send_message(message="Бот работает исправно.", attachment="")
+          send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message)
