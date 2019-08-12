@@ -57,7 +57,7 @@ while(1 == 1):
             Бот - проверка работоспособности
             ''')
         elif(response == 'статус'):
-          if(str(event.user_id) in adminlist):
+          if(str(event.user_id) in adminlist or in moderlist):
             dir=os.getcwd()
             stat = check_status()
             if(stat == 1):
@@ -76,6 +76,12 @@ while(1 == 1):
             send_message(message='Не хватает прав!')
         elif(response == 'тест'):
           send_message(message = 'Тест пройден')
+        elif(response == 'addadmin'):
+          id = input('Введите id человека: ')
+          adminlist.append(id)
+          text = 'Человек с id: ' +id +' добавлен в список админов человеком с id: ' +str(event.user_id)
+          print(text)
+          message_send(message = text)
         else:
           text = 'Команда введена не верно'
           print(text)
