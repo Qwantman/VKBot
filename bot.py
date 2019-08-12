@@ -16,17 +16,15 @@ def send_message(message=None, attachment=None):
 def send_chat(message=None, attachment=None):
   vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для беседок
-f = open("/home/ec2-user/fullup", 'r')
 kolvo = 0
 resp = ' '
 adminlist=['201464141', '525009136']
-#обозначили лист админов(их id в ВК) и открыли конфиг
+#обозначили лист админов(их id в ВК)
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
 vk_session = vk_api.VkApi(token = token)
 session_api = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 start_time = time.monotonic()
-full_time = f.read()
 #начали сессию апи ВК и запустили таймер для команды "аптайм"
 print('Бот запущен!')
 res = 1
@@ -42,7 +40,6 @@ while(1 == 1):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
         elif(response == 'аптайм'):
           send_message(message='С момента запуска прошло: ' +str(int(time.monotonic() - start_time)) +' секунд', attachment='photo-184588235_457239049')
-          send_message(message='С момента первого запуска прошло: ' +str(int(time.monotonic() - (int(start_time)+int(full_time)))) +' секунд', attachment='photo-184588235_457239049')
         elif(response == 'помощь'):
           send_message(message='''
           Бот - проверка роботоспособности.
