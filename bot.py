@@ -78,17 +78,17 @@ while(1 == 1):
         elif(response == 'тест'):
           send_message(message = 'Тест пройден')
         elif(response == 'addadmin'):
-          id = input('Введите id человека: ')
+          id = input('Введите id человекав консоле')
           adminlist.append(id)
           text = 'Человек с id: ' +id +' добавлен в список админов человеком с id: ' +str(event.user_id)
           print(text)
-          message_send(message = text, attachment = 'photo-184588235_457239050')
+          send_message(message = text, attachment = 'photo-184588235_457239050')
         elif(response == 'addmoder'):
-          id = input('Введите id человека: ')
+          send_message(message='Введите id человека в консоле')
           moderlist.append(id)
           text = 'Человек с id: ' +id +' добавлен в список модеров человеком с id: ' +str(event.user_id)
           print(text)
-          message_send(message = text, attachment = 'photo-184588235_457239050')
+          send_message(message = text, attachment = 'photo-184588235_457239050')
         else:
           text = 'Команда введена не верно'
           print(text)
