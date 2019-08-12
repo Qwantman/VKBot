@@ -27,14 +27,14 @@ while True:
         elif(response == 'аптайм' or 'uptime'):
           send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
         elif(response == 'выкл' or 'off'):
-          message='Выключаю бота...'
-          print(message)
-          send_message(message)
+          text='Выключаю бота...'
+          print(text)
+          send_message(message=text)
           break
         else:
-          message = 'Комманда введена не верно'
-          print(message)
-          send_message(message)
+          text = 'Комманда введена не верно'
+          print(text)
+          send_message(message=text)
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
