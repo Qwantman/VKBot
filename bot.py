@@ -18,7 +18,6 @@ print('Бот запущен!')
 while True:
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
-      print('Текст сообщения: '+ str(event.text))
       response = event.text.lower()
       if(event.from_user and not event.from_me):
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
@@ -26,7 +25,7 @@ while True:
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
           response = ' '
         elif(response == 'аптайм' or 'uptime'):
-          send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
+          send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)) +' секунд', attachment='photo-184588235_457239049')
           response = ' '
         else:
           text = 'Комманда введена не верно'
