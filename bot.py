@@ -99,7 +99,7 @@ while(1 == 1):
           if(str(event.user_id) in adminlist or moderlist):
             send_message(message='Введите id человека в консоле')
             id = input('Введите id человека: ') 
-           if(id == 'отмена'):
+            if(id == 'отмена'):
               text = 'Админ отменил добавление'
               print(text)
               send_message(message=text, attachment="photo-184588235_457239051")
