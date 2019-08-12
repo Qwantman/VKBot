@@ -50,7 +50,7 @@ while True:
               stat = 'NOT OK'
               send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat)
           else:
-            send_message(message=Не хватает прав!)
+            send_message(message='Не хватает прав!')
         else:
           text = 'Команда введена не верно'
           print(text)
