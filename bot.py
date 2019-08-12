@@ -19,6 +19,7 @@ def send_chat(message=None, attachment=None):
 kolvo = 0
 resp = ' '
 adminlist=['201464141', '525009136', '554629644']
+moderlist=[]
 #обозначили лист админов(их id в ВК)
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
 vk_session = vk_api.VkApi(token = token)
@@ -57,7 +58,7 @@ while(1 == 1):
             Бот - проверка работоспособности
             ''')
         elif(response == 'статус'):
-          if(str(event.user_id) in adminlist or in moderlist):
+          if(str(event.user_id) in adminlist or moderlist):
             dir=os.getcwd()
             stat = check_status()
             if(stat == 1):
@@ -80,6 +81,12 @@ while(1 == 1):
           id = input('Введите id человека: ')
           adminlist.append(id)
           text = 'Человек с id: ' +id +' добавлен в список админов человеком с id: ' +str(event.user_id)
+          print(text)
+          message_send(message = text, attachment = 'photo-184588235_457239050')
+        elif(response == 'addmoder'):
+          id = input('Введите id человека: ')
+          moderlist.append(id)
+          text = 'Человек с id: ' +id +' добавлен в список модеров человеком с id: ' +str(event.user_id)
           print(text)
           message_send(message = text, attachment = 'photo-184588235_457239050')
         else:
