@@ -25,7 +25,7 @@ start_time = time.monotonic()
 print('Бот запущен!')
 res = 1
 #если не выдало ошибок, тогда ща пойдут логи если кто-то напишет
-while(resp != 'разрешено'):
+while(1 == 1):
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
       response = event.text.lower()
@@ -58,7 +58,7 @@ while(resp != 'разрешено'):
           if(str(event.user_id) in adminlist):
             send_message(message='Выключаю бота...')
             print('Выключаю бота...')
-            resp = 'разрешено'
+            exit()
           else:
             send_message(message='Не хватает прав!')
         else:
