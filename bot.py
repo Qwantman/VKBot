@@ -28,6 +28,7 @@ while True:
           send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
           continue
         elif(response == 'выкл' or 'off'):
+            print('Выключаю бота...')
             break
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
