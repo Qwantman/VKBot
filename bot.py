@@ -26,6 +26,7 @@ res = 1
 while True:
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
+      kolvo = kolvo + 1
       response = event.text.lower()
       if(event.from_user and not event.from_me):
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
@@ -48,7 +49,7 @@ while True:
               stat = 'OK'
             else:
               stat = 'NOT OK'
-            send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat)
+            send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat '\n Всего боту отправлено: ' +str(kolvo) +' сообщений')
           else:
             send_message(message='Не хватает прав!')
         else:
