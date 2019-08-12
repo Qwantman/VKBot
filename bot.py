@@ -15,7 +15,7 @@ longpoll = VkLongPoll(vk_session)
 start_time = time.monotonic()
 print('Бот запущен!')
 #если не выдало ошибок, тогда ща пойдут логи если кто-то напишет
-while True:
+while(event.text.lower() != 'выкл' or 'off'):
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
       print('Текст сообщения: '+ str(event.text))
@@ -26,11 +26,6 @@ while True:
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
         elif(response == 'аптайм' or 'uptime'):
           send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
-        elif(response == 'выкл' or 'off'):
-          text='Выключаю бота...'
-          print(text)
-          send_message(message=text)
-          break
         else:
           text = 'Комманда введена не верно'
           print(text)
