@@ -26,8 +26,7 @@ vk_session = vk_api.VkApi(token = token)
 session_api = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 start_time = time.monotonic()
-for full_time in f:
-  full_time = full_time
+full_time = f.read()
 #начали сессию апи ВК и запустили таймер для команды "аптайм"
 print('Бот запущен!')
 res = 1
