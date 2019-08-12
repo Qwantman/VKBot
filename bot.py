@@ -6,7 +6,7 @@ def send_message(message=None, attachment=None):
   vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
   
 def send_chat(message=None, attachment=None):
-  vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment "random_id": random.randint(-2147483648,+2147483648)})
+  vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 
 token = "YourToken" 
 vk_session = vk_api.VkApi(token = token)
