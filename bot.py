@@ -18,6 +18,7 @@ def send_chat(message=None, attachment=None):
 #для беседок
 kolvo = 0
 resp = ' '
+mains=['201464141', '554629644']
 adminlist=['201464141', '525009136', '554629644']
 moderlist=[]
 #обозначили лист админов(их id в ВК)
@@ -78,29 +79,39 @@ while(1 == 1):
         elif(response == 'тест'):
           send_message(message = 'Тест пройден')
         elif(response == 'addadmin'):
-          send_message(message='Введите id человека в консоле')
-          id = input('Введите id человека: ') 
-          if(id == 'отмена'):
-            text = 'Админ отменил добавление'
-            print(text)
-            send_message(message=text, attachment="photo-184588235_457239051")
+          if(str(event.user_id) in mains):
+            send_message(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил добавление'
+              print(text)
+              send_message(message=text, attachment="photo-184588235_457239051")
+            else:
+              adminlist.append(id)
+              text = 'Человек с id: ' +str(id) +' добавлен в список админов человеком с id: ' +str(event.user_id)
+              print(text)
+              send_message(message = text, attachment = 'photo-184588235_457239050')
           else:
-            adminlist.append(id)
-            text = 'Человек с id: ' +str(id) +' добавлен в список админов человеком с id: ' +str(event.user_id)
+            text='Недостаточно прав!'
             print(text)
-            send_message(message = text, attachment = 'photo-184588235_457239050')
+            send_message(message=text)
         elif(response == 'addmoder'):
-          send_message(message='Введите id человека в консоле')
-          id = input('Введите id человека: ') 
-          if(id == 'отмена'):
-            text = 'Админ отменил добавление'
-            print(text)
-            send_message(message=text, attachment="photo-184588235_457239051")
+          if(str(event.user_id) in adminlist or moderlist):
+            send_message(message='Введите id человека в консоле')
+           id = input('Введите id человека: ') 
+           if(id == 'отмена'):
+              text = 'Админ отменил добавление'
+              print(text)
+              send_message(message=text, attachment="photo-184588235_457239051")
+            else:
+              moderlist.append(id)
+              text = 'Человек с id: ' +str(id) +' добавлен в список модеров человеком с id: ' +str(event.user_id)
+              print(text)
+              send_message(message = text, attachment = 'photo-184588235_457239050')
           else:
-            moderlist.append(id)
-            text = 'Человек с id: ' +str(id) +' добавлен в список модеров человеком с id: ' +str(event.user_id)
+            text='Недостаточно прав!'
             print(text)
-            send_message(message = text, attachment = 'photo-184588235_457239050')
+            send_message(message=text)
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
