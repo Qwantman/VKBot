@@ -2,6 +2,12 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 import random
 import time
+import os
+def check_status():
+  if(res == '1'):
+    return 1
+  else:
+    return 2
 def send_message(message=None, attachment=None):
   vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для ЛС
@@ -14,6 +20,7 @@ session_api = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 start_time = time.monotonic()
 print('Бот запущен!')
+res = 1
 #если не выдало ошибок, тогда ща пойдут логи если кто-то напишет
 while True:
   for event in longpoll.listen():
@@ -32,6 +39,14 @@ while True:
           Аптайм - выдаёт время с момента запуска
           Статус - выдаёт статус хостинга бота и рабочую директорию
           ''')
+        else(response == 'статус'):
+          dir=os.getcwd()
+          stat = chech_status()
+          if(stat == 1):
+            stat = OK
+          else:
+            stat = NOT OK
+          send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat)
         else:
           text = 'Команда введена не верно'
           print(text)
