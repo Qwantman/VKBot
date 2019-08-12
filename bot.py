@@ -2,7 +2,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 import random
 import time
-event = 'тест'
+event.text=' '
 def send_message(message=None, attachment=None):
   vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для ЛС
