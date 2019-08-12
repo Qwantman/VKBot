@@ -18,7 +18,7 @@ def send_chat(message=None, attachment=None):
 #для беседок
 kolvo = 0
 resp = ' '
-adminlist=['201464141', '525009136']
+adminlist=['201464141', '525009136', '554629644']
 #обозначили лист админов(их id в ВК)
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
 vk_session = vk_api.VkApi(token = token)
@@ -71,10 +71,11 @@ while(1 == 1):
           if(str(event.user_id) in adminlist):
             send_message(message='Выключаю бота...')
             print('Выключаю бота...')
-            f.write(str(int(full_time) +int(start_time)))
             exit() 
           else:
             send_message(message='Не хватает прав!')
+        elif(response == 'тест'):
+          send_message(message = 'Тест пройден')
         else:
           text = 'Команда введена не верно'
           print(text)
