@@ -15,6 +15,7 @@ def send_chat(message=None, attachment=None):
   vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для беседок
 kolvo = 0
+resp = ' '
 adminlist=['201464141', '525009136']
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
 vk_session = vk_api.VkApi(token = token)
@@ -24,7 +25,7 @@ start_time = time.monotonic()
 print('Бот запущен!')
 res = 1
 #если не выдало ошибок, тогда ща пойдут логи если кто-то напишет
-while(1==1):
+while(resp != 'разрешено'):
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
       response = event.text.lower()
@@ -57,7 +58,7 @@ while(1==1):
           if(str(event.user_id) in adminlist):
             send_message(message='Выключаю бота...')
             print('Выключаю бота...')
-            break
+            resp = 'разрешено'
           else:
             send_message(message='Не хватает прав!')
         else:
