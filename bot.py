@@ -24,11 +24,11 @@ while True:
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
         if(response == 'бот' or 'bot'):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
-          if(response == 'аптайм' or 'uptime'):
-            send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
-            if(response == 'выкл' or 'off'):
-              print('Выключаю бота...')
-              break
+        if(response == 'аптайм' or 'uptime'):
+          send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
+        if(response == 'выкл' or 'off'):
+          print('Выключаю бота...')
+          break
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message)
