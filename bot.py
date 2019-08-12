@@ -24,16 +24,16 @@ while True:
         if(response == 'бот'):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
         elif(response == 'аптайм'):
-          send_message(message='С момента запуска прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
+          send_message(message='С момента запуска прошло: ' +str(int(time.monotonic() - start_time)) +' секунд', attachment='photo-184588235_457239049')
         elif(response == 'помощь'):
-          send_message('''
+          send_message(message='''
           Бот - проверка роботоспособности.
           Для админов:
           Аптайм - выдаёт время с момента запуска
-          Статус - выдаёт 
+          Статус - выдаёт статус хостинга бота и рабочую директорию
           ''')
         else:
-          text = 'Комманда введена не верно'
+          text = 'Команда введена не верно'
           print(text)
           send_message(message=text)
       elif(event.from_chat and not event.from_me):
