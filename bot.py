@@ -16,7 +16,7 @@ def send_message(message=None, attachment=None):
 def send_chat(message=None, attachment=None):
   vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для беседок
-f.open("/home/ec2-user/fullup", 'w')
+f = open("/home/ec2-user/fullup", 'w')
 kolvo = 0
 resp = ' '
 adminlist=['201464141', '525009136']
