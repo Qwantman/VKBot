@@ -24,12 +24,15 @@ while True:
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
         if(response == 'бот' or 'bot'):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
+          response = ' '
         elif(response == 'аптайм' or 'uptime'):
           send_message(message='Прошло: ' +str(int(time.monotonic() - start_time)), attachment='photo-184588235_457239049')
+          response = ' '
         else:
           text = 'Комманда введена не верно'
           print(text)
           send_message(message=text)
+          response = ' '
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
