@@ -4,7 +4,7 @@ import random
 import time
 import os
 def check_status():
-  if(res == '1'):
+  if(res == 1):
     return 1
   else:
     return 2
@@ -43,9 +43,9 @@ while True:
           dir=os.getcwd()
           stat = chech_status()
           if(stat == 1):
-            stat = OK
+            stat = 'OK'
           else:
-            stat = NOT OK
+            stat = 'NOT OK'
           send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat)
         else:
           text = 'Команда введена не верно'
