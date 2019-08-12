@@ -54,7 +54,7 @@ while(1==1):
           else:
             send_message(message='Не хватает прав!')
         elif(response == 'выкл'):
-          if(event.user_id in adminlist):
+          if(str(event.user_id) in adminlist):
             send_message(message='Выключаю бота...')
             print('Выключаю бота...')
             break
