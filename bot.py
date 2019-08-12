@@ -81,7 +81,7 @@ while(1 == 1):
           send_message(message='Введите id человека в консоле')
           id = input('Введите id человека: ') 
           if(id == 'отмена'):
-            text = 'Админ отменил добавление"
+            text = 'Админ отменил добавление'
             print(text)
             send_message(message=text, attachment="photo-184588235_457239051")
           else:
@@ -93,7 +93,7 @@ while(1 == 1):
           send_message(message='Введите id человека в консоле')
           id = input('Введите id человека: ') 
           if(id == 'отмена'):
-            text = 'Админ отменил добавление"
+            text = 'Админ отменил добавление'
             print(text)
             send_message(message=text, attachment="photo-184588235_457239051")
           else:
