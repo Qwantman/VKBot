@@ -81,7 +81,7 @@ while(1 == 1):
           adminlist.append(id)
           text = 'Человек с id: ' +id +' добавлен в список админов человеком с id: ' +str(event.user_id)
           print(text)
-          message_send(message = text)
+          message_send(message = text, attachment = 'photo-184588235_457239050')
         else:
           text = 'Команда введена не верно'
           print(text)
