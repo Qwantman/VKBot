@@ -39,7 +39,7 @@ while True:
           Аптайм - выдаёт время с момента запуска
           Статус - выдаёт статус хостинга бота и рабочую директорию
           ''')
-        else(response == 'статус'):
+        elif(response == 'статус'):
           dir=os.getcwd()
           stat = chech_status()
           if(stat == 1):
