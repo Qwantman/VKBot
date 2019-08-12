@@ -24,12 +24,12 @@ start_time = time.monotonic()
 print('Бот запущен!')
 res = 1
 #если не выдало ошибок, тогда ща пойдут логи если кто-то напишет
-while True:
+while(1==1):
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
-      kolvo = kolvo + 1
       response = event.text.lower()
       if(event.from_user and not event.from_me):
+        kolvo = kolvo + 1
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
         if(response == 'бот'):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
@@ -51,6 +51,13 @@ while True:
             else:
               stat = 'NOT OK'
             send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat +'\n Всего боту отправлено: ' +str(kolvo) +' сообщений')
+          else:
+            send_message(message='Не хватает прав!')
+        elif(response == 'выкл'):
+          if(event.user_id in adminlist):
+            send_message(message='Выключаю бота...')
+            print('Выключаю бота...')
+            break
           else:
             send_message(message='Не хватает прав!')
         else:
