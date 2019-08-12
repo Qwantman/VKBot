@@ -1,7 +1,7 @@
 from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 import random
-
+import time
 def send_message(message=None, attachment=None):
   vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
   
@@ -12,6 +12,7 @@ token = "YourToken"
 vk_session = vk_api.VkApi(token = token)
 session_api = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
+start_time = time.monotonic()
 print('Бот запущен!')
 while True:
   for event in longpoll.listen():
@@ -22,6 +23,9 @@ while True:
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
         if(response == 'бот' or 'bot'):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
+        elif(response == 'аптайм' or 'uptime'):
+          message=('Прошло: ' +str(int(time.monotomic() - start_time)))
+          send_message(message=message, attachment='photo-184588235_457239049')
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message)
