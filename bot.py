@@ -65,7 +65,8 @@ while(1 == 1):
           if(str(event.user_id) in adminlist):
             send_message(message='Выключаю бота...')
             print('Выключаю бота...')
-            exit()
+            f.write(str(int(full_time) +int(start_time)))
+            exit() 
           else:
             send_message(message='Не хватает прав!')
         else:
