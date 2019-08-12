@@ -49,7 +49,7 @@ while True:
               stat = 'OK'
             else:
               stat = 'NOT OK'
-            send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat '\n Всего боту отправлено: ' +str(kolvo) +' сообщений')
+            send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat +'\n Всего боту отправлено: ' +str(kolvo) +' сообщений')
           else:
             send_message(message='Не хватает прав!')
         else:
