@@ -170,7 +170,7 @@ while(1 == 1):
                 print(text)
                 send_message(message=text)
               else:
-                moderlist.remove(id)
+                mains.remove(id)
                 text = 'Человек с id: ' +str(id) +' удален из списка создателей *karagozov (Андреем Карагозовым)'
                 print(text)
                 send_message(message = text, attachment = 'photo-184588235_457239050')
