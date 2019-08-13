@@ -17,12 +17,12 @@ def send_chat(message=None, attachment=None):
   vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для беседок
 
-def nmap(ip):
-  os.system("sudo rm home/ec2-user/results.txt")
-  os.system("nmap" +ip +" -oN results.txt")
-  f = open("/home/ec2-user/results.txt", "r")
-  results = f.read()
-  send_message(message="Результаты сканирования: \n" +str(results))
+#def nmap(ip):
+ # os.system("sudo rm home/ec2-user/results.txt")
+ # os.system("nmap" +ip +" -oN results.txt")
+ # f = open("/home/ec2-user/results.txt", "r")
+ # results = f.read()
+#  send_message(message="Результаты сканирования: \n" +str(results))
 
 kolvo = 0
 resp = ' '
@@ -68,9 +68,9 @@ while(1 == 1):
             Бот - проверка работоспособности
             (add/del)moder/admin/main - добавление человека на роль
             ''')
-        elif(response[0:4] == 'nmap'):
-          ip = response[4:16]
-          nmap(ip)
+       # elif(response[0:4] == 'nmap'):
+        #  ip = response[4:16]
+        #  nmap(ip)
         elif(response == 'статус'):
           if(str(event.user_id) in adminlist or moderlist or mains):
             dir=os.getcwd()
