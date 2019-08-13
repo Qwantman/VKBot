@@ -69,8 +69,13 @@ while(1 == 1):
             (add/del)moder/admin/main - добавление человека на роль
             ''')
         elif(response[0:4] == 'nmap'):
-          ip = response[4:16]
-          nmap(ip)
+          if(str(event.user_id) in moderlist or adminlist or mains):
+            ip = response[4:16]
+            nmap(ip)
+          else:
+            text = 'Недостаточно прав!'
+            print(text)
+            send_message(message=text)
         elif(response == 'статус'):
           if(str(event.user_id) in adminlist or moderlist or mains):
             dir=os.getcwd()
