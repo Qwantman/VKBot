@@ -18,7 +18,7 @@ def send_chat(message=None, attachment=None):
 #для беседок
 
 def nmap(ip):
-  os.system("nmap" +ip +"-oN results")
+  os.system("nmap" +ip +" -oN results")
   send_message(message=os.system("cat ../results"))
 
 kolvo = 0
