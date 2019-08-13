@@ -43,7 +43,7 @@ while(1 == 1):
         elif(response == 'аптайм'):
           send_message(message='С момента запуска прошло: ' +str(int(time.monotonic() - start_time)) +' секунд', attachment='photo-184588235_457239049')
         elif(response == 'помощь'):
-          if(str(event.user_id) in adminlist):
+          if(str(event.user_id) in adminlist or mains):
             send_message(message='''           
             Помощь - команды бота
             Аптайм - выдаёт время с момента запуска           
@@ -59,7 +59,7 @@ while(1 == 1):
             Бот - проверка работоспособности
             ''')
         elif(response == 'статус'):
-          if(str(event.user_id) in adminlist or moderlist):
+          if(str(event.user_id) in adminlist or moderlist or mains):
             dir=os.getcwd()
             stat = check_status()
             if(stat == 1):
