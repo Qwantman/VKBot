@@ -2,6 +2,7 @@ from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 import random
 import time
+from threading import Thread
 import os
 def check_status():
   if(res == 1):
@@ -80,17 +81,24 @@ while(1 == 1):
             (add/del)moder/admin/main - добавление человека на роль
             ''')
         elif(response[0:4] == 'nmap'):
-          if(str(event.user_id) in moderlist or adminlist or mains):
+          if(str(event.user_id) in adminlist or mains):
             ip = response[4:400]
-            nmap(ip)
+            nmp = Thread(target=nmap, args=(ip))
+            nmp.start()
           else:
             text = 'Недостаточно прав!'
             print(text)
             send_message(message=text)
-        elif(response[0:4] == 'ping'):
-          ip = response[4:400]
-          ping(ip)
         
+        elif(response[0:4] == 'ping'):
+          if(str(event.chat_id) in moderlist or adminlist or mains):
+            ip = response[4:400]
+            pn = Thread(target=ping, args=(ip))
+            pn.start()
+          else:
+            text = 'Недостаточно прав!'
+            print(text)
+            send_message(message=text)
         elif(response == 'статус'):
           if(str(event.user_id) in adminlist or moderlist or mains):
             dir=os.getcwd()
