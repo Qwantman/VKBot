@@ -123,6 +123,8 @@ while(1 == 1):
             else:
               if(id not in moderlist):
                 text = 'Данного человека нет в списке модеров'
+                print(text)
+                send_message(message=text)
               else:
                 moderlist.remove(id)
                 text = 'Человек с id: ' +str(id) +' удален из списка модеров человеком с id: ' +str(event.user_id)
