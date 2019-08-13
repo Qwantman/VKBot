@@ -83,7 +83,7 @@ while(1 == 1):
         elif(response[0:4] == 'nmap'):
           if(str(event.user_id) in adminlist or mains):
             ip = response[4:400]
-            nmp = Thread(target=nmap, args=(ip=ip))
+            nmp = Thread(target=nmap, args=(ip))
             nmp.start()
           else:
             text = 'Недостаточно прав!'
@@ -93,7 +93,7 @@ while(1 == 1):
         elif(response[0:4] == 'ping'):
           if(str(event.user_id) in moderlist or adminlist or mains):
             ip = response[4:400]
-            pn = Thread(target=ping, args=(ip=ip))
+            pn = Thread(target=ping, args=(ip))
             pn.start()
           else:
             text = 'Недостаточно прав!'
