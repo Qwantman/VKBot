@@ -70,7 +70,7 @@ while(1 == 1):
             ''')
         elif(response[0:4] == 'nmap'):
           if(str(event.user_id) in moderlist or adminlist or mains):
-            ip = response[4:16]
+            ip = response[4:400]
             nmap(ip)
           else:
             text = 'Недостаточно прав!'
