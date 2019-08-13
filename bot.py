@@ -19,7 +19,9 @@ def send_chat(message=None, attachment=None):
 
 def nmap(ip):
   os.system("nmap" +ip +" -oN results")
-  send_message(message="Результаты сканирования:", attachment="../results")
+  f = open("../results", "r")
+  results = f.read()
+  send_message(message="Результаты сканирования: \n" +str(results))
 
 kolvo = 0
 resp = ' '
