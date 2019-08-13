@@ -18,8 +18,8 @@ def send_chat(message=None, attachment=None):
 #для беседок
 kolvo = 0
 resp = ' '
-mains=['201464141', '554629644']
-adminlist=['201464141', '525009136', '554629644']
+mains=['201464141', '554629644', '557200191']
+adminlist=['525009136']
 moderlist=[]
 #обозначили лист админов(их id в ВК)
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
@@ -130,8 +130,12 @@ while(1 == 1):
                 text = 'Человек с id: ' +str(id) +' удален из списка модеров человеком с id: ' +str(event.user_id)
                 print(text)
                 send_message(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_message(message=text)
         elif(response == 'deladmin'):
-          if(str(event.user_id) in adminlist):
+          if(str(event.user_id) in mains):
             send_message(message='Введите id человека в консоле')
             id = input('Введите id человека: ') 
             if(id == 'отмена'):
@@ -139,15 +143,19 @@ while(1 == 1):
               print(text)
               send_message(message=text, attachment="photo-184588235_457239051")
             else:
-              if(id not in moderlist):
+              if(id not in adminlist):
                 text = 'Данного человека нет в списке админов'
                 print(text)
                 send_message(message=text)
               else:
-                moderlist.remove(id)
+                adminlist.remove(id)
                 text = 'Человек с id: ' +str(id) +' удален из списка админов человеком с id: ' +str(event.user_id)
                 print(text)
                 send_message(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_message(message=text)
         elif(response == 'delmain'):
           if(str(event.user_id) == '201464141'):
             send_message(message='Введите id человека в консоле')
@@ -157,13 +165,13 @@ while(1 == 1):
               print(text)
               send_message(message=text, attachment="photo-184588235_457239051")
             else:
-              if(id not in moderlist):
+              if(id not in mains):
                 text = 'Данного человека нет в списке создателей'
                 print(text)
                 send_message(message=text)
               else:
                 moderlist.remove(id)
-                text = 'Человек с id: ' +str(id) +' удален из списка создателей *karagozov (Андреем Карагозовом)'
+                text = 'Человек с id: ' +str(id) +' удален из списка создателей *karagozov (Андреем Карагозовым)'
                 print(text)
                 send_message(message = text, attachment = 'photo-184588235_457239050')
           else:
