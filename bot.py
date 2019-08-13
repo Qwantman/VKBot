@@ -19,7 +19,7 @@ def send_chat(message=None, attachment=None):
 
 def nmap(ip):
   ip = response[4:16]
-  send_message(message=os.system(""nmap" +ip"))
+  send_message(message=os.system("nmap +ip"))
 
 kolvo = 0
 resp = ' '
