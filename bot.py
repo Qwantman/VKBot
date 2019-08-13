@@ -20,7 +20,7 @@ def send_chat(message=None, attachment=None):
 def nmap(ip):
   os.system("rm -R ../results")
   os.system("nmap" +ip +" -oN results")
-  f = open("../results", "r")
+  f = open("/home/ec2-user/results", "r")
   results = f.read()
   send_message(message="Результаты сканирования: \n" +str(results))
 
