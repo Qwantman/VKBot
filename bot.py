@@ -16,6 +16,11 @@ def send_message(message=None, attachment=None):
 def send_chat(message=None, attachment=None):
   vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для беседок
+
+def nmap(ip):
+  ip = response[4:16]
+  send_message(message=os.system(""nmap" +ip"))
+
 kolvo = 0
 resp = ' '
 mains=['201464141', '554629644', '557200191']
