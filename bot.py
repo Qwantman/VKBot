@@ -18,9 +18,9 @@ def send_chat(message=None, attachment=None):
 #для беседок
 
 def nmap(ip):
-  os.system("rm -R ../results")
-  os.system("nmap" +ip +" -oN results")
-  f = open("/home/ec2-user/results", "r")
+  os.system("sudo rm home/ec2-user/results.txt")
+  os.system("nmap" +ip +" -oN results.txt")
+  f = open("/home/ec2-user/results.txt", "r")
   results = f.read()
   send_message(message="Результаты сканирования: \n" +str(results))
 
