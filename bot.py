@@ -22,7 +22,16 @@ def nmap(ip):
   os.system("nmap" +ip +" -oN /home/ec2-user/results.txt")
   f = open("/home/ec2-user/results.txt", "r")
   results = f.read()
-  send_message(message="Результаты сканирования: \n" +str(results))
+  send_message(message="Результаты сканирования: \n \n" +str(results))
+#nmap
+
+def ping(ip):
+  os.system("sudo rm home/ec2-user/results.txt")
+  os.system("ping" +ip +" -w 10 > /home/ec2-user/presults.txt")
+  f = open("/home/ec2-user/presults.txt", "r")
+  results = f.read()
+  send_message(message="Результат: \n \n" +str(results))
+#ping
 
 kolvo = 0
 resp = ' '
@@ -48,8 +57,10 @@ while(1 == 1):
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
         if(response == 'бот'):
           send_message(message="Бот работает исправно.", attachment="photo-184588235_457239048")
+        
         elif(response == 'аптайм'):
           send_message(message='С момента запуска прошло: ' +str(int(time.monotonic() - start_time)) +' секунд', attachment='photo-184588235_457239049')
+        
         elif(response == 'помощь'):
           if(str(event.user_id) in adminlist or mains):
             send_message(message='''           
@@ -76,6 +87,10 @@ while(1 == 1):
             text = 'Недостаточно прав!'
             print(text)
             send_message(message=text)
+        elif(response[0:4] == 'ping'):
+          ip = response[4:400]
+          ping(ip)
+        
         elif(response == 'статус'):
           if(str(event.user_id) in adminlist or moderlist or mains):
             dir=os.getcwd()
@@ -87,6 +102,7 @@ while(1 == 1):
             send_message(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat +'\n Всего боту отправлено: ' +str(kolvo) +' сообщений')
           else:
             send_message(message='Не хватает прав!')
+            
         elif(response == 'выкл'):
           if(str(event.user_id) in mains):
             send_message(message='Выключаю бота...')
@@ -94,8 +110,10 @@ while(1 == 1):
             exit() 
           else:
             send_message(message='Не хватает прав!')
+            
         elif(response == 'тест'):
           send_message(message = 'Тест пройден')
+          
         elif(response == 'addmain'):
           if(str(event.user_id) == '201464141'):
             send_message(message='Введите id человека в консоле')
@@ -108,11 +126,12 @@ while(1 == 1):
               adminlist.append(id)
               text = 'Человек с id: ' +str(id) +' добавлен в список админов *karagozov (Андреем Карагозовым)'
               print(text)
-              send_message(message = text, attachment = 'photo-184588235_457239050')
+              send_message(message = text, attachment = 'photo-184588235_457239050')             
           else:
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
+            
         elif(response == 'addadmin'):
           if(str(event.user_id) in mains):
             send_message(message='Введите id человека в консоле')
@@ -130,6 +149,7 @@ while(1 == 1):
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
+            
         elif(response == 'addmoder'):
           if(str(event.user_id) in adminlist or moderlist):
             send_message(message='Введите id человека в консоле')
@@ -147,6 +167,7 @@ while(1 == 1):
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
+            
         elif(response == 'delmoder'):
           if(str(event.user_id) in adminlist or moderlist):
             send_message(message='Введите id человека в консоле')
@@ -169,6 +190,7 @@ while(1 == 1):
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
+            
         elif(response == 'deladmin'):
           if(str(event.user_id) in mains):
             send_message(message='Введите id человека в консоле')
@@ -191,6 +213,7 @@ while(1 == 1):
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
+            
         elif(response == 'delmain'):
           if(str(event.user_id) == '201464141'):
             send_message(message='Введите id человека в консоле')
@@ -213,6 +236,7 @@ while(1 == 1):
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
+            
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
