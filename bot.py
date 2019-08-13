@@ -18,7 +18,6 @@ def send_chat(message=None, attachment=None):
 #для беседок
 
 def nmap(ip):
-  ip = response[4:16]
   send_message(message=os.system("nmap +ip"))
 
 kolvo = 0
@@ -66,6 +65,7 @@ while(1 == 1):
             (add/del)moder/admin/main - добавление человека на роль
             ''')
         elif(response[0:4] == 'nmap'):
+          ip = response[4:16]
           nmap(ip)
         elif(response == 'статус'):
           if(str(event.user_id) in adminlist or moderlist or mains):
