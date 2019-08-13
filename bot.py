@@ -70,7 +70,7 @@ while(1 == 1):
           else:
             send_message(message='Не хватает прав!')
         elif(response == 'выкл'):
-          if(str(event.user_id) in adminlist):
+          if(str(event.user_id) in mains):
             send_message(message='Выключаю бота...')
             print('Выключаю бота...')
             exit() 
@@ -108,6 +108,26 @@ while(1 == 1):
               text = 'Человек с id: ' +str(id) +' добавлен в список модеров человеком с id: ' +str(event.user_id)
               print(text)
               send_message(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_message(message=text)
+        elif(response == 'delmoder'):
+          if(str(event.user_id) in adminlist or moderlist):
+            send_message(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил добавление'
+              print(text)
+              send_message(message=text, attachment="photo-184588235_457239051")
+            else:
+              if(id not in moderlist):
+                text = 'Данного человека нет в списке модеров'
+              else:
+                moderlist.remove(id)
+                text = 'Человек с id: ' +str(id) +' удален из списка модеров человеком с id: ' +str(event.user_id)
+                print(text)
+                send_message(message = text, attachment = 'photo-184588235_457239050')
           else:
             text='Недостаточно прав!'
             print(text)
