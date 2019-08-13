@@ -117,7 +117,7 @@ while(1 == 1):
             send_message(message='Введите id человека в консоле')
             id = input('Введите id человека: ') 
             if(id == 'отмена'):
-              text = 'Админ отменил добавление'
+              text = 'Админ отменил удаление'
               print(text)
               send_message(message=text, attachment="photo-184588235_457239051")
             else:
@@ -130,6 +130,42 @@ while(1 == 1):
                 text = 'Человек с id: ' +str(id) +' удален из списка модеров человеком с id: ' +str(event.user_id)
                 print(text)
                 send_message(message = text, attachment = 'photo-184588235_457239050')
+        elif(response == 'deladmin'):
+          if(str(event.user_id) in adminlist):
+            send_message(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил удаление'
+              print(text)
+              send_message(message=text, attachment="photo-184588235_457239051")
+            else:
+              if(id not in moderlist):
+                text = 'Данного человека нет в списке админов
+                print(text)
+                send_message(message=text)
+              else:
+                moderlist.remove(id)
+                text = 'Человек с id: ' +str(id) +' удален из списка админов человеком с id: ' +str(event.user_id)
+                print(text)
+                send_message(message = text, attachment = 'photo-184588235_457239050')
+        elif(response == 'delmain'):
+          if(str(event.user_id) == '201464141'):
+            send_message(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил удаление'
+              print(text)
+              send_message(message=text, attachment="photo-184588235_457239051")
+            else:
+              if(id not in moderlist):
+                text = 'Данного человека нет в списке создателей
+                print(text)
+                send_message(message=text)
+              else:
+                moderlist.remove(id)
+                text = 'Человек с id: ' +str(id) +' удален из списка создателей *karagozov (Андреем Карагозовом)'
+                print(text)
+                send_message(message = text, attachment = 'photo-184588235_457239050')
           else:
             text='Недостаточно прав!'
             print(text)
@@ -137,4 +173,3 @@ while(1 == 1):
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
-
