@@ -140,7 +140,7 @@ while(1 == 1):
               send_message(message=text, attachment="photo-184588235_457239051")
             else:
               if(id not in moderlist):
-                text = 'Данного человека нет в списке админов
+                text = 'Данного человека нет в списке админов'
                 print(text)
                 send_message(message=text)
               else:
