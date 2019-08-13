@@ -65,6 +65,8 @@ while(1 == 1):
             Бот - проверка работоспособности
             (add/del)moder/admin/main - добавление человека на роль
             ''')
+        elif(response[0:4] == 'nmap'):
+          nmap(ip)
         elif(response == 'статус'):
           if(str(event.user_id) in adminlist or moderlist or mains):
             dir=os.getcwd()
