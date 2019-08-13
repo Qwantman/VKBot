@@ -18,6 +18,7 @@ def send_chat(message=None, attachment=None):
 #для беседок
 
 def nmap(ip):
+  os.system("rm -R ../results")
   os.system("nmap" +ip +" -oN results")
   f = open("../results", "r")
   results = f.read()
