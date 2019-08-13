@@ -28,7 +28,7 @@ def nmap(ip):
 
 def ping(ip):
   os.system("sudo rm home/ec2-user/results.txt")
-  os.system("ping" +ip +" -w 10 > /home/ec2-user/presults.txt")
+  os.system("ping" +ip +" -w 2 > /home/ec2-user/presults.txt")
   f = open("/home/ec2-user/presults.txt", "r")
   results = f.read()
   send_message(message="Результат: \n \n" +str(results))
@@ -83,8 +83,7 @@ while(1 == 1):
         elif(response[0:4] == 'nmap'):
           if(str(event.user_id) in adminlist or mains):
             ip = response[4:400]
-            nmp = Thread(target=nmap, args=('ip'))
-            nmp.start()
+            nmap(ip)
           else:
             text = 'Недостаточно прав!'
             print(text)
@@ -93,8 +92,7 @@ while(1 == 1):
         elif(response[0:4] == 'ping'):
           if(str(event.user_id) in moderlist or adminlist or mains):
             ip = response[4:400]
-            pn = Thread(target=ping, args=('ip'))
-            pn.start()
+            ping(ip)
           else:
             text = 'Недостаточно прав!'
             print(text)
