@@ -91,7 +91,7 @@ while(1 == 1):
             send_message(message=text)
         
         elif(response[0:4] == 'ping'):
-          if(str(event.chat_id) in moderlist or adminlist or mains):
+          if(str(event.user_id) in moderlist or adminlist or mains):
             ip = response[4:400]
             pn = Thread(target=ping, args=(ip))
             pn.start()
