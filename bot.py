@@ -35,6 +35,7 @@ def ping(ip):
 #ping
 
 def cmd(cm):
+  cm = cm +" > /home/ec2-user/cmres.txt"
   os.system(cm +" > /home/ec2-user/cmres.txt")
   f = open('/home/ec2-user/cmres.txt', 'r')
   result = f.read()
