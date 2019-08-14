@@ -260,7 +260,7 @@ while(1 == 1):
         
         elif(response[0:6] == 'команда'):
           if(str(event.user_id) in adminlist or mains):
-            cm = response[7:700]
+            cm = response[6:600]
             cmd(cm)
           else:
             text='Недостаточно прав!'
