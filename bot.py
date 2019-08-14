@@ -43,12 +43,12 @@ def cmd(cm):
   result = f.read()
   send_message(message="Результат: \n \n" +str(result))
 #shell
-
+  
 kolvo = 0
 resp = ' '
 mains=['201464141', '554629644', '557200191']
 adminlist=['525009136']
-moderlist=[]
+moderlist=['413349893']
 #обозначили лист админов(их id в ВК)
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
 vk_session = vk_api.VkApi(token = token)
@@ -258,10 +258,17 @@ while(1 == 1):
             print(text)
             send_message(message=text)
         
-        elif(response[0:6] == 'команда'):
+        elif(response[0:7] == 'команда'):
           if(str(event.user_id) in adminlist or mains):
-            cm = response[6:600]
+            cm = response[7:700]
             cmd(cm)
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_message(message=text)
+        elif(response == ''):
+          if(str(event.user_id) in adminlist or mains):
+            
           else:
             text='Недостаточно прав!'
             print(text)
