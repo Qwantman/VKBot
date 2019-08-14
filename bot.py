@@ -34,6 +34,12 @@ def ping(ip):
   send_message(message="Результат: \n \n" +str(results))
 #ping
 
+def cmd(cm):
+  os.system(cm +" > /home/ec2-user/cmres.txt")
+  f = open('/home/ec2-user/cmres.txt', 'r')
+  result = f.read()
+  send_message(message="Результат: \n \n" +str(result))
+
 kolvo = 0
 resp = ' '
 mains=['201464141', '554629644', '557200191']
@@ -101,8 +107,9 @@ while(1 == 1):
             text = 'Недостаточно прав!'
             print(text)
             send_message(message=text)
+            
         elif(response == 'статус'):
-          if(str(event.user_id) in adminlist or moderlist or mains):
+          if(str(event.user_id) in adminlist or mains):
             dir=os.getcwd()
             stat = check_status()
             if(stat == 1):
@@ -246,7 +253,15 @@ while(1 == 1):
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
-            
+        
+        elif(response[0:6] == 'команда'):
+          if(str(event.user_id) in adminlist or mains):
+            cm = response[7:700]
+            cmd(cm)
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_message(message=text)
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
