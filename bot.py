@@ -27,7 +27,7 @@ def nmap(ip):
 #nmap
 
 def ping(ip):
-  os.system("sudo rm home/ec2-user/results.txt")
+  os.system("sudo rm home/ec2-user/preresults.txt")
   os.system("ping" +ip +" -w 2 > /home/ec2-user/presults.txt")
   f = open("/home/ec2-user/presults.txt", "r")
   results = f.read()
@@ -35,11 +35,14 @@ def ping(ip):
 #ping
 
 def cmd(cm):
+  os.system("sudo rm home/ec2-user/results.txt")
   cm = cm +" > /home/ec2-user/cmres.txt"
-  os.system(cm +" > /home/ec2-user/cmres.txt")
+  print(cm)
+  os.system(cm)
   f = open('/home/ec2-user/cmres.txt', 'r')
   result = f.read()
   send_message(message="Результат: \n \n" +str(result))
+#shell
 
 kolvo = 0
 resp = ' '
