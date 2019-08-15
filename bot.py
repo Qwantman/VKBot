@@ -47,23 +47,23 @@ def create_key(event):
   if(str(event.user_id) in adminlist or moderlist or mains):
     keyboard = VkKeyboard(one_time = False)
   
-    keyboard.add_button('Бот', color=VkKeyboardColor.DEFOULT)
-    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Бот', color=VkKeyboardColor.DEFAULT)
+    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFAULT)
   
     keyboard.add_line()          
-    keyboard.add_button('Статус', color=VkKeyboardColor.DEFOULT)
-    keyboard.add_button('Выкл', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Статус', color=VkKeyboardColor.DEFAULT)
+    keyboard.add_button('Выкл', color=VkKeyboardColor.DEFAULT)
             
     keyboard.add_line()
-    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFAULT)
   else:
     keyboard = VkKeyboard(one_time = False)
   
-    keyboard.add_button('Бот', color=VkKeyboardColor.DEFOULT)
-    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Бот', color=VkKeyboardColor.DEFAULT)
+    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFAULT)
             
     keyboard.add_line()
-    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFAULT)
   
   keyboard = keyboard.get_keyboard()
   return keyboard
