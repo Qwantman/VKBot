@@ -43,6 +43,8 @@ def cmd(cm):
   send_message(message="Результат: \n \n" +str(result))
 #shell
 
+#Первая клава:
+
 def create_key(event):
   if(str(event.user_id) in adminlist or moderlist or mains):
     keyboard = VkKeyboard(one_time = False)
@@ -56,8 +58,41 @@ def create_key(event):
             
     keyboard.add_line()
     keyboard.add_button('Помощь', color=VkKeyboardColor.DEFAULT)
+    
+    keyboard.add_line()
+    keyboard.add_button('Закрыть', color=VkKeyboardColor.DEFAULT)
   else:
     keyboard = VkKeyboard(one_time = False)
+  
+    keyboard.add_button('Бот', color=VkKeyboardColor.DEFAULT)
+    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFAULT)
+            
+    keyboard.add_line()
+    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFAULT)
+    
+    keyboard.add_line()
+    keyboard.add_button('Закрыть', color=VkKeyboardColor.DEFAULT)
+  
+  keyboard = keyboard.get_keyboard()
+  return keyboard
+
+#И еще одна:
+
+def create_key_One(event):
+  if(str(event.user_id) in adminlist or moderlist or mains):
+    keyboard = VkKeyboard(one_time = True)
+  
+    keyboard.add_button('Бот', color=VkKeyboardColor.DEFAULT)
+    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFAULT)
+  
+    keyboard.add_line()          
+    keyboard.add_button('Статус', color=VkKeyboardColor.DEFAULT)
+    keyboard.add_button('Выкл', color=VkKeyboardColor.DEFAULT)
+    
+    keyboard.add_line()
+    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFAULT)
+  else:
+    keyboard = VkKeyboard(one_time = True)
   
     keyboard.add_button('Бот', color=VkKeyboardColor.DEFAULT)
     keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFAULT)
@@ -67,7 +102,15 @@ def create_key(event):
   
   keyboard = keyboard.get_keyboard()
   return keyboard
-  
+
+#И для закрытия
+
+def close_keys():
+  keyboard = VkKeyboard(one_time = True)
+  keyboard = get_empty_keyboard()
+  return keyboard
+#объявили клавы
+
 kolvo = 0
 resp = ' '
 mains=['201464141', '554629644', '557200191']
@@ -87,6 +130,8 @@ while(1 == 1):
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
       keyboard = create_key(event)
+      OneKeyboard = create_key_One(event)
+      Close = close_keys()
       response = event.text.lower()
       if(event.from_user and not event.from_me):
         kolvo = kolvo + 1
@@ -109,7 +154,7 @@ while(1 == 1):
             Для админов:
             Статус - выдаёт статус хостинга бота и рабочую директорию
             Выкл - выключить бота
-            ''')
+            ''', keyboard=OneKeyboard)
           else:
             send_message(message='''           
             Помощь - команды бота
@@ -118,9 +163,13 @@ while(1 == 1):
             (add/del)moder/admin/main - добавление человека на роль
             ping [ссылка] - ping ресурса(от роли модера)
             nmap [ссылка] - nmap ресурса(от роли админа)
-            ''')
+            ''', keyboard=OneKeyboard)
+            
         elif(response == 'начать'):
           send_message(message='Вот что я могу:', keyboard=keyboard)
+          
+        elif(response == 'закрыть'):
+          send_message(message='&#13;', keyboard=Close)
 
         elif(response[0:4] == 'nmap'):
           if(str(event.user_id) in adminlist or mains):
