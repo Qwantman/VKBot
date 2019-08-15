@@ -1,4 +1,5 @@
 from vk_api.longpoll import VkLongPoll, VkEventType
+from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 import vk_api
 import random
 import time
@@ -10,8 +11,8 @@ def check_status():
   else:
     return 2
 #начало командной части
-def send_message(message=None, attachment=None):
-  vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
+def send_message(message=None, attachment=None, keyboard=None):
+  vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "keyboard": keyboard, "random_id": random.randint(-2147483648,+2147483648)})
 #для ЛС
 
 def send_chat(message=None, attachment=None):
@@ -36,13 +37,33 @@ def ping(ip):
 
 def cmd(cm):
   os.system("sudo rm home/ec2-user/results.txt")
-  cm = cm +" > /home/ec2-user/cmres.txt"
-  print(cm)
-  os.system(cm)
+  os.system("sudo" +cm +" > "/home/ec2-user/cmres.txt")
   f = open('/home/ec2-user/cmres.txt', 'r')
   result = f.read()
   send_message(message="Результат: \n \n" +str(result))
 #shell
+
+def create_key(event):
+  if(str(event.user_id) in adminlist or moderlist or mains):
+    keyboard = VkKeyboard(one_time = False)
+  
+    keyboard.add_button('Бот', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFOULT
+  
+    keyboard.add_line()          
+    keyboard.add_button('Статус', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Выкл', color=VkKeyboardColor.DEFOULT)
+            
+    keyboard.add_line()
+    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFOULT)
+  else:
+    keyboard = VkKeyboard(one_time = False)
+  
+    keyboard.add_button('Бот', color=VkKeyboardColor.DEFOULT)
+    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFOULT)
+            
+    keyboard.add_line()
+    keyboard.add_button('Помощь', color=VkKeyboardColor.DEFOULT)
   
 kolvo = 0
 resp = ' '
@@ -62,6 +83,7 @@ res = 1
 while(1 == 1):
   for event in longpoll.listen():
     if(event.type == VkEventType.MESSAGE_NEW):
+      keyboard = create_key(event)
       response = event.text.lower()
       if(event.from_user and not event.from_me):
         kolvo = kolvo + 1
@@ -94,6 +116,9 @@ while(1 == 1):
             ping [ссылка] - ping ресурса(от роли модера)
             nmap [ссылка] - nmap ресурса(от роли админа)
             ''')
+        elif(response == 'начать'):
+          send_message(message='Вот что я могу:', keyboard=keyboard)
+
         elif(response[0:4] == 'nmap'):
           if(str(event.user_id) in adminlist or mains):
             ip = response[4:400]
