@@ -37,7 +37,7 @@ def ping(ip):
 
 def cmd(cm):
   os.system("sudo rm home/ec2-user/results.txt")
-  os.system("sudo" +cm +" > "/home/ec2-user/cmres.txt")
+  os.system("sudo" +cm +" > /home/ec2-user/cmres.txt")
   f = open('/home/ec2-user/cmres.txt', 'r')
   result = f.read()
   send_message(message="Результат: \n \n" +str(result))
