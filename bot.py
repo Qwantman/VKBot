@@ -65,6 +65,9 @@ def create_key(event):
     keyboard.add_line()
     keyboard.add_button('Помощь', color=VkKeyboardColor.DEFOULT)
   
+  keyboard = keyboard.get_keyboard()
+  return keyboard
+  
 kolvo = 0
 resp = ' '
 mains=['201464141', '554629644', '557200191']
