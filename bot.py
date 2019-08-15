@@ -107,8 +107,7 @@ def create_key_One(event):
 
 def close_keys():
   keyboard = VkKeyboard(one_time = True)
-  keyboard = get_empty_keyboard()
-  return keyboard
+  return keyboard.get_empty_keyboard()
 #объявили клавы
 
 kolvo = 0
