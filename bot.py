@@ -48,7 +48,7 @@ def create_key(event):
     keyboard = VkKeyboard(one_time = False)
   
     keyboard.add_button('Бот', color=VkKeyboardColor.DEFOULT)
-    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFOULT
+    keyboard.add_button('Аптайм', color=VkKeyboardColor.DEFOULT)
   
     keyboard.add_line()          
     keyboard.add_button('Статус', color=VkKeyboardColor.DEFOULT)
