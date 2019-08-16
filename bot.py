@@ -364,7 +364,7 @@ while(1 == 1):
           print(otvet)
           send_message(message=otvet)
           
-      elif(event.from_chat and not event.from_me):
+      elif event.from_chat :
         kolvo = kolvo + 1
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
         if(response == 'бот'):
