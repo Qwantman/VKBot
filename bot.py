@@ -5,8 +5,8 @@ import random
 import time
 from threading import Thread
 import os
-def check_status():
-  if(res == 1):
+def check_status(s):
+  if(s == 1):
     return 1
   else:
     return 2
@@ -116,11 +116,16 @@ mains=['201464141', '554629644', '557200191']
 adminlist=['525009136']
 moderlist=['413349893']
 #обозначили лист создателей, админов и модеров(их id в ВК)
-token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
-vk_session = vk_api.VkApi(token = token)
-session_api = vk_session.get_api()
-longpoll = VkLongPoll(vk_session)
-start_time = time.monotonic()
+try:
+  token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
+  vk_session = vk_api.VkApi(token = token)
+  session_api = vk_session.get_api()
+  longpoll = VkLongPoll(vk_session)
+  start_time = time.monotonic()
+except:
+  print('Ошибка запуска. Проверьте настройки')
+  s = 2
+  exit()
 #начали сессию апи ВК и запустили таймер для команды "аптайм"
 print('Бот запущен!')
 res = 1
