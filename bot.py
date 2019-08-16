@@ -17,7 +17,7 @@ def send_message(message=None, attachment=None, keyboard=None):
   vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "keyboard": keyboard, "random_id": random.randint(-2147483648,+2147483648)})
 #для ЛС
 
-def send_chat(message=None, attachment=None):
+def send_chat(message=None, attachment=None, keyboard=None):
   vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
 #для беседок
 
@@ -26,7 +26,7 @@ def nmap(ip):
   os.system("nmap" +ip +" -oN /home/ubuntu/results.txt")
   f = open("/home/ubuntu/results.txt", "r")
   results = f.read()
-  send_message(message="Результаты сканирования: \n \n" +str(results))
+  return results
 #nmap
 
 def ping(ip):
@@ -34,7 +34,7 @@ def ping(ip):
   os.system("ping" +ip +" -w 2 > /home/ubuntu/presults.txt")
   f = open("/home/ubuntu/presults.txt", "r")
   results = f.read()
-  send_message(message="Результат: \n \n" +str(results))
+  return results
 #ping
 
 def cmd(cm):
@@ -42,7 +42,7 @@ def cmd(cm):
   os.system("sudo" +cm +" > /home/ubuntu/cmres.txt")
   f = open('/home/ubuntu/cmres.txt', 'r')
   result = f.read()
-  send_message(message="Результат: \n \n" +str(result))
+  return result
 #shell
 
 #Первая клава:
@@ -181,7 +181,8 @@ while(1 == 1):
         elif(response[0:4] == 'nmap'):
           if(str(event.user_id) in adminlist or mains):
             ip = response[4:400]
-            nmap(ip)
+            reses = nmap(ip)
+            send_message(message="Результаты сканирования: \n \n" +str(reses))
           else:
             text = 'Недостаточно прав!'
             print(text)
@@ -190,7 +191,8 @@ while(1 == 1):
         elif(response[0:4] == 'ping'):
           if(str(event.user_id) in moderlist or adminlist or mains):
             ip = response[4:400]
-            ping(ip)
+            reses = ping(ip)
+            send_message(message="Результаты сканирования: \n \n" +str(reses))
           else:
             text = 'Недостаточно прав!'
             print(text)
@@ -345,7 +347,8 @@ while(1 == 1):
         elif(response[0:7] == 'команда'):
           if(str(event.user_id) in adminlist or mains):
             cm = response[7:700]
-            cmd(cm)
+            reses = cmd(cm)
+            send_message(message="Результаты сканирования: \n \n" +str(reses))
           else:
             text='Недостаточно прав!'
             print(text)
@@ -362,5 +365,226 @@ while(1 == 1):
           send_message(message=otvet)
           
       elif(event.from_chat and not event.from_me):
-        message = input('Введите сообщение в ответ: ')
-        send_chat(message=message)
+        kolvo = kolvo + 1
+        print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
+        if(response == 'бот'):
+          send_chat(message="Бот работает исправно.", attachment="photo-184588235_457239048")
+        
+        elif(response == 'аптайм'):
+          send_chat(message='С момента запуска прошло: ' +str(int(time.monotonic() - start_time)) +' секунд', attachment='photo-184588235_457239049')
+        
+        elif(response == 'помощь'):
+          if(str(event.user_id) in adminlist or mains):
+            send_chat(message='''           
+            Помощь - команды бота
+            Аптайм - выдаёт время с момента запуска           
+            Бот - проверка работоспособности
+            (add/del)moder/admin/main - добавление человека на роль
+            ping [ссылка] - ping ресурса(от роли модера)
+            nmap [ссылка] - nmap ресурса(от роли админа)
+            Для админов:
+            Статус - выдаёт статус хостинга бота и рабочую директорию
+            Выкл - выключить бота
+            ''', keyboard=OneKeyboard)
+          else:
+            send_chat(message='''           
+            Помощь - команды бота
+            Аптайм - выдаёт время с момента запуска           
+            Бот - проверка работоспособности
+            (add/del)moder/admin/main - добавление человека на роль
+            ping [ссылка] - ping ресурса(от роли модера)
+            nmap [ссылка] - nmap ресурса(от роли админа)
+            ''', keyboard=OneKeyboard)
+            
+        elif(response == 'начать'):
+          send_chat(message='Вот что я могу:', keyboard=keyboard)
+          
+        elif(response == 'закрыть'):
+          send_chat(message='&#13;', keyboard=Close)
+
+        elif(response[0:4] == 'nmap'):
+          if(str(event.user_id) in adminlist or mains):
+            ip = response[4:400]
+            reses = nmap(ip)
+            send_chat(message="Результаты сканирования: \n \n" +str(reses))
+          else:
+            text = 'Недостаточно прав!'
+            print(text)
+            send_chat(message=text)
+        
+        elif(response[0:4] == 'ping'):
+          if(str(event.user_id) in moderlist or adminlist or mains):
+            ip = response[4:400]
+            reses = ping(ip)
+            send_chat(message="Результаты сканирования: \n \n" +str(reses))
+          else:
+            text = 'Недостаточно прав!'
+            print(text)
+            send_chat(message=text)
+            
+        elif(response == 'статус'):
+          if(str(event.user_id) in adminlist or mains):
+            dir=os.getcwd()
+            stat = check_status(s)
+            if(stat == 1):
+              stat = 'OK'
+            else:
+              stat = 'NOT OK'
+            send_chat(message="Рабочая директория - " +str(dir) +'\n Статус бота - ' +stat +'\n Всего боту отправлено: ' +str(kolvo) +' сообщений')
+          else:
+            send_chat(message='Не хватает прав!')
+            
+        elif(response == 'выкл'):
+          if(str(event.user_id) in mains):
+            send_chat(message='Выключаю бота...')
+            print('Выключаю бота...')
+            exit() 
+          else:
+            send_chat(message='Не хватает прав!')
+            
+        elif(response == 'тест'):
+          send_chat(message = 'Тест пройден')
+          
+        elif(response == 'addmain'):
+          if(str(event.user_id) == '201464141'):
+            send_chat(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = '*karagozov (Админ) отменил добавление'
+              print(text)
+              send_chat(message=text, attachment="photo-184588235_457239051")
+            else:
+              adminlist.append(id)
+              text = 'Человек с id: ' +str(id) +' добавлен в список админов *karagozov (Андреем Карагозовым)'
+              print(text)
+              send_chat(message = text, attachment = 'photo-184588235_457239050')             
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_chat(message=text)
+            
+        elif(response == 'addadmin'):
+          if(str(event.user_id) in mains):
+            send_chat(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил добавление'
+              print(text)
+              send_chat(message=text, attachment="photo-184588235_457239051")
+            else:
+              adminlist.append(id)
+              text = 'Человек с id: ' +str(id) +' добавлен в список админов человеком с id: ' +str(event.user_id)
+              print(text)
+              send_chat(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_message(message=text)
+            
+        elif(response == 'addmoder'):
+          if(str(event.user_id) in adminlist or moderlist):
+            send_chat(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил добавление'
+              print(text)
+              send_chat(message=text, attachment="photo-184588235_457239051")
+            else:
+              moderlist.append(id)
+              text = 'Человек с id: ' +str(id) +' добавлен в список модеров человеком с id: ' +str(event.user_id)
+              print(text)
+              send_chat(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            sendchat(message=text)
+            
+        elif(response == 'delmoder'):
+          if(str(event.user_id) in adminlist or moderlist):
+            send_chat(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил удаление'
+              print(text)
+              send_chat(message=text, attachment="photo-184588235_457239051")
+            else:
+              if(id not in moderlist):
+                text = 'Данного человека нет в списке модеров'
+                print(text)
+                send_chat(message=text)
+              else:
+                moderlist.remove(id)
+                text = 'Человек с id: ' +str(id) +' удален из списка модеров человеком с id: ' +str(event.user_id)
+                print(text)
+                send_chat(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_chat(message=text)
+            
+        elif(response == 'deladmin'):
+          if(str(event.user_id) in mains):
+            send_chat(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил удаление'
+              print(text)
+              send_chat(message=text, attachment="photo-184588235_457239051")
+            else:
+              if(id not in adminlist):
+                text = 'Данного человека нет в списке админов'
+                print(text)
+                send_chat(message=text)
+              else:
+                adminlist.remove(id)
+                text = 'Человек с id: ' +str(id) +' удален из списка админов человеком с id: ' +str(event.user_id)
+                print(text)
+                send_chat(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_chat(message=text)
+            
+        elif(response == 'delmain'):
+          if(str(event.user_id) == '201464141'):
+            send_chat(message='Введите id человека в консоле')
+            id = input('Введите id человека: ') 
+            if(id == 'отмена'):
+              text = 'Админ отменил удаление'
+              print(text)
+              send_chat(message=text, attachment="photo-184588235_457239051")
+            else:
+              if(id not in mains):
+                text = 'Данного человека нет в списке создателей'
+                print(text)
+                send_chat(message=text)
+              else:
+                mains.remove(id)
+                text = 'Человек с id: ' +str(id) +' удален из списка создателей *karagozov (Андреем Карагозовым)'
+                print(text)
+                send_chat(message = text, attachment = 'photo-184588235_457239050')
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_chat(message=text)
+        
+        elif(response[0:7] == 'команда'):
+          if(str(event.user_id) in adminlist or mains):
+            cm = response[7:700]
+            reses = cmd(cm)
+            send_chat(message="Результаты сканирования: \n \n" +str(reses))
+          else:
+            text='Недостаточно прав!'
+            print(text)
+            send_chat(message=text)
+            
+        elif(response == 'географ'):
+          send_chat(message='Дьявол изгнан', attachment='photo-184588235_457239054')
+          
+        elif(response[0:3] == 'wiki'):
+          print('Debug yes')
+          zapros = response[3:1000]
+          otvet = wikipedia.page(zapros)
+          print(otvet)
+          send_chat(message=otvet)
+          
