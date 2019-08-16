@@ -355,8 +355,10 @@ while(1 == 1):
           send_message(message='Дьявол изгнан', attachment='photo-184588235_457239054')
           
         elif(response[0:3] == 'wiki'):
+          print('Debug yes')
           zapros = response[4:1000]
-          otvet = wikipedia.summary(zapros)
+          otvet = wikipedia.page(zapros)
+          print(otvet)
           send_message(message=otvet)
           
       elif(event.from_chat and not event.from_me):
