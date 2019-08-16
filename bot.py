@@ -5,6 +5,8 @@ import random
 import time
 from threading import Thread
 import os
+import wikipedia
+
 def check_status(s):
   if(s == 1):
     return 1
@@ -351,7 +353,12 @@ while(1 == 1):
             
         elif(response == 'географ'):
           send_message(message='Дьявол изгнан', attachment='photo-184588235_457239054')
-            
+          
+        elif(response[0:3] == 'wiki'):
+          response[4:1000] == zapros
+          otvet = wikipedia.summary
+          send_message(message=otvet)
+          
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
