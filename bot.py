@@ -122,6 +122,7 @@ try:
   session_api = vk_session.get_api()
   longpoll = VkLongPoll(vk_session)
   start_time = time.monotonic()
+  s = 1
 except:
   print('Ошибка запуска. Проверьте настройки')
   s = 2
@@ -196,7 +197,7 @@ while(1 == 1):
         elif(response == 'статус'):
           if(str(event.user_id) in adminlist or mains):
             dir=os.getcwd()
-            stat = check_status()
+            stat = check_status(s)
             if(stat == 1):
               stat = 'OK'
             else:
