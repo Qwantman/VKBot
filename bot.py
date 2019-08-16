@@ -350,7 +350,7 @@ while(1 == 1):
             send_message(message=text)
             
         elif(response == 'географ'):
-          send_message(message='Дьявол изгнан', attachment='photo-184588235_457239053')
+          send_message(message='Дьявол изгнан', attachment='photo-184588235_457239054')
             
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
