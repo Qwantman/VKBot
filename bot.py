@@ -115,7 +115,7 @@ resp = ' '
 mains=['201464141', '554629644', '557200191']
 adminlist=['525009136']
 moderlist=['413349893']
-#обозначили лист админов(их id в ВК)
+#обозначили лист создателей, админов и модеров(их id в ВК)
 token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
 vk_session = vk_api.VkApi(token = token)
 session_api = vk_session.get_api()
@@ -342,13 +342,10 @@ while(1 == 1):
             text='Недостаточно прав!'
             print(text)
             send_message(message=text)
-       # elif(response == ''):
-        #  if(str(event.user_id) in adminlist or mains):
             
-        #  else:
-        #    text='Недостаточно прав!'
-         #   print(text)
-         #   send_message(message=text)
+        elif(response == 'географ'):
+          send_message(message='Дьявол изгнан', attachment='photo-184588235_457239053')
+            
       elif(event.from_chat and not event.from_me):
         message = input('Введите сообщение в ответ: ')
         send_chat(message=message)
