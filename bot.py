@@ -20,25 +20,25 @@ def send_chat(message=None, attachment=None):
 #для беседок
 
 def nmap(ip):
-  os.system("sudo rm home/ec2-user/results.txt")
-  os.system("nmap" +ip +" -oN /home/ec2-user/results.txt")
-  f = open("/home/ec2-user/results.txt", "r")
+  os.system("sudo rm home/ubuntu/results.txt")
+  os.system("nmap" +ip +" -oN /home/ubuntu/results.txt")
+  f = open("/home/ubuntu/results.txt", "r")
   results = f.read()
   send_message(message="Результаты сканирования: \n \n" +str(results))
 #nmap
 
 def ping(ip):
-  os.system("sudo rm home/ec2-user/preresults.txt")
-  os.system("ping" +ip +" -w 2 > /home/ec2-user/presults.txt")
-  f = open("/home/ec2-user/presults.txt", "r")
+  os.system("sudo rm home/ubuntu/preresults.txt")
+  os.system("ping" +ip +" -w 2 > /home/ubuntu/presults.txt")
+  f = open("/home/ubuntu/presults.txt", "r")
   results = f.read()
   send_message(message="Результат: \n \n" +str(results))
 #ping
 
 def cmd(cm):
-  os.system("sudo rm home/ec2-user/results.txt")
-  os.system("sudo" +cm +" > /home/ec2-user/cmres.txt")
-  f = open('/home/ec2-user/cmres.txt', 'r')
+  os.system("sudo rm home/ubuntu/results.txt")
+  os.system("sudo" +cm +" > /home/ubuntu/cmres.txt")
+  f = open('/home/ubuntu/cmres.txt', 'r')
   result = f.read()
   send_message(message="Результат: \n \n" +str(result))
 #shell
