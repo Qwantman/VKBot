@@ -140,6 +140,7 @@ while(1 == 1):
       OneKeyboard = create_key_One(event)
       Close = close_keys()
       response = event.text.lower()
+      print(response)
       if(event.from_user and not event.from_me):
         kolvo = kolvo + 1
         print('Пользователь с id: ' +str(event.user_id) +" запросил: " +str(response))
