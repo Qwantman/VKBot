@@ -14,11 +14,11 @@ def check_status(s):
     return 2
 #начало командной части
 def send_message(message=None, attachment=None, keyboard=None):
-  vk_session.method('messages.send', {"user_id": event.user_id, "message": message, "attachment": attachment, "keyboard": keyboard, "random_id": random.randint(-2147483648,+2147483648)})
+  vk.messages.send(peer_id=event.peer_id, message=message, attachment=attachment, keyboard=keyboard, random_id=random.randint(-2147483648,+2147483648))
 #для ЛС
 
 def send_chat(message=None, attachment=None, keyboard=None):
-  vk_session.method('messages.send', {"chat_id": event.chat_id, "message": message, "attachment": attachment, "random_id": random.randint(-2147483648,+2147483648)})
+  vk.messages.send(peer_id=event.peer_id, message=message, attachment=attachment, keyboard=keyboard, random_id=random.randint(-2147483648,+2147483648))
 #для беседок
 
 def nmap(ip):
