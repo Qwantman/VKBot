@@ -121,7 +121,7 @@ moderlist=['413349893']
 try:
   token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
   vk_session = vk_api.VkApi(token = token)
-  session_api = vk_session.get_api()
+  vk = vk_session.get_api()
   longpoll = VkLongPoll(vk_session)
   start_time = time.monotonic()
   s = 1
