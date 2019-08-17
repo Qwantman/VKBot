@@ -120,9 +120,8 @@ moderlist=['413349893']
 #обозначили лист создателей, админов и модеров(их id в ВК)
 
 #token = "d18d76cc11b8c219d368cd861818c86821ec2b595d9bd9dbf1ff804dfbd2185c9826696e48accd3c0364c"
-login, password = "+79855765312", "789456123Фл"
-vk_session = vk_api.VkApi(login, password)
-vk_session.auth()
+token1 = "b0db6e608b031785f8303549be905e0c53629482360f90b216c78947d862036a3aaec2a6a864eac1ab3b0"
+vk_session = vk_api.VkApi(token = token1)
 vk = vk_session.get_api()
 longpoll = VkLongPoll(vk_session)
 start_time = time.monotonic()
