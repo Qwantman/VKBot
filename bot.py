@@ -22,25 +22,25 @@ def send_chat(message=None, attachment=None, keyboard=None):
 #для беседок
 
 def nmap(ip):
-  os.system("sudo rm home/ubuntu/results.txt")
-  os.system("nmap" +ip +" -oN /home/ubuntu/results.txt")
-  f = open("/home/ubuntu/results.txt", "r")
+  os.system("sudo rm results.txt")
+  os.system("nmap" +ip +" -oN results.txt")
+  f = open("results.txt", "r")
   results = f.read()
   return results
 #nmap
 
 def ping(ip):
-  os.system("sudo rm home/ubuntu/preresults.txt")
-  os.system("ping" +ip +" -w 2 > /home/ubuntu/presults.txt")
-  f = open("/home/ubuntu/presults.txt", "r")
+  os.system("sudo rm presults.txt")
+  os.system("ping" +ip +" -w 2 > presults.txt")
+  f = open("presults.txt", "r")
   results = f.read()
   return results
 #ping
 
 def cmd(cm):
-  os.system("sudo rm home/ubuntu/results.txt")
-  os.system("sudo" +cm +" > /home/ubuntu/cmres.txt")
-  f = open('/home/ubuntu/cmres.txt', 'r')
+  os.system("sudo rm cmres.txt")
+  os.system("sudo" +cm +" > cmres.txt")
+  f = open('cmres.txt', 'r')
   result = f.read()
   return result
 #shell
@@ -48,7 +48,7 @@ def cmd(cm):
 #Первая клава:
 
 def create_key(event):
-  if(str(event.user_id) in adminlist or moderlist or mains):
+  if((str(event.user_id) in adminlist) or (str(event.user_id) in moderlist) or (str(event.user_id) in mains)):
     keyboard = VkKeyboard(one_time = False)
   
     keyboard.add_button('Бот', color=VkKeyboardColor.DEFAULT)
@@ -81,7 +81,7 @@ def create_key(event):
 #И еще одна:
 
 def create_key_One(event):
-  if(str(event.user_id) in adminlist or moderlist or mains):
+  if((str(event.user_id) in adminlist) or (str(event.user_id) in moderlist) or (str(event.user_id) in mains)):
     keyboard = VkKeyboard(one_time = True)
   
     keyboard.add_button('Бот', color=VkKeyboardColor.DEFAULT)
@@ -178,7 +178,7 @@ while(1 == 1):
           send_message(message='&#13;', keyboard=Close)
 
         elif(response[0:4] == 'nmap'):
-          if(str(event.user_id) in adminlist or mains):
+          if((str(event.user_id) in adminlist) or (str(event.user_id) in mains)):
             ip = response[4:400]
             reses = nmap(ip)
             send_message(message="Результаты сканирования: \n \n" +str(reses))
@@ -188,7 +188,7 @@ while(1 == 1):
             send_message(message=text)
         
         elif(response[0:4] == 'ping'):
-          if(str(event.user_id) in moderlist or adminlist or mains):
+          if((str(event.user_id) in adminlist) or (str(event.user_id) in moderlist) or (str(event.user_id) in mains)):
             ip = response[4:400]
             reses = ping(ip)
             send_message(message="Результаты сканирования: \n \n" +str(reses))
